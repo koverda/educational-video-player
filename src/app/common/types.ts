@@ -1,4 +1,4 @@
-interface Video {
+export interface Video {
     id: string;
     created_at: string;
     video_url: string;
@@ -8,7 +8,7 @@ interface Video {
     num_comments: number;
 }
 
-interface Comment {
+export interface Comment {
     id: string;
     video_id: string;
     user_id: string;
