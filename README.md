@@ -1,4 +1,4 @@
-# Educational Video Player
+# LearnWell Video Player
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped
 with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -7,7 +7,7 @@ Application specifications are from [10Fold Showcase 1](https://app.10foldhiring
 
 ## Overview
 
-The Educational Video Player is a web application designed to allow users to create, comment on, and watch educational
+The LearnWell Video Player is a web application designed to allow users to create, comment on, and watch educational
 videos. It provides a seamless and engaging experience with intuitive UI and robust functionality.
 
 ## Features
@@ -45,18 +45,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - **Comments**: Use any fake `user_id` for making comments.
 - **Video URLs**: Upload example video URLs for testing.
 
-## Deploy on Vercel
+## Deploying
 
-Deploy the app easily with
-the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+ToDo
 
 ## Contributing
 
-We welcome contributions to improve the Educational Video Player. Feel free to open issues and submit pull requests on
-the [GitHub repository](https://github.com/vercel/next.js/).
+We welcome contributions to improve the LearnWell Video Player. Feel free to open issues and submit pull requests on
+the [GitHub repository](https://github.com/koverda/educational-video-player/).
 
 ## Contact
 
-For questions or feedback, reach out to [support@educationalvideoplayer.com](mailto:support@educationalvideoplayer.com).
+For questions or feedback, reach out to [support@LearnWell.com](mailto:support@learnwell.com).
 
 Happy coding!
