@@ -40,6 +40,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## API Integration
 
+This application consumes the following API: https://take-home-assessment-423502.uc.r.appspot.com/docs#/
+
 - **User ID**: Use your first and last name in snake case as your `user_id` for creating video objects (e.g., John
   Smith: john_smith).
 - **Comments**: Use any fake `user_id` for making comments.
