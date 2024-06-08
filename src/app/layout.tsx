@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ReactNode } from 'react';
+import NavBar from './components/NavBar';
 
-const inter = Inter({ subsets: ["latin"] });
+interface LayoutProps {
+    children: ReactNode;
+}
 
 export const metadata: Metadata = {
     title: "LearnWell: Your Educational Video Platform",
@@ -18,7 +22,14 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body>
+        <div>
+            <NavBar/>
+            <main>{children}</main>
+        </div>
+
+        </body>
+
         </html>
     );
 }
