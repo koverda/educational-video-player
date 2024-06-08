@@ -8,6 +8,10 @@ export interface Video {
     num_comments: number;
 }
 
+export interface VideoCardProps {
+    video: Video;
+}
+
 export interface Comment {
     id: string;
     video_id: string;
