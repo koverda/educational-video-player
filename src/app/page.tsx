@@ -12,7 +12,7 @@ const HomePage = () => {
     };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex flex-col items-center justify-between p-24">
       <div>Welcome to the Educational Video Player</div>
         <VideoCard video={vid} />
     </main>
