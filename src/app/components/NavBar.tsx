@@ -15,10 +15,10 @@ const NavBar = () => {
     };
 
     return (
-        <nav className="bg-gray-800 p-4">
+        <nav className="bg-gray-800 p-4 fixed top-0 w-full">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="text-white text-xl font-bold">
-                    <Link href="/"><Image src="/images/FULL_LOGO_COLOR.png" width={315} height={87} /></Link>
+                    <Link href="/"><Image src="/images/FULL_LOGO_COLOR.png" alt="LearnWell Logo" width={105} height={29} priority={true} /></Link>
                 </div>
                 <div className="space-x-4 flex items-center">
                     <button

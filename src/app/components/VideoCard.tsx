@@ -1,6 +1,7 @@
 import React from 'react';
 import { Video } from "../common/types";
 import Link from "next/link";
+import Image from 'next/image'
 import { getRandomInt } from "../common/util";
 
 export interface VideoCardProps {
@@ -14,8 +15,10 @@ const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
         <Link href={`/videos/${video.id}`} passHref>
 
             <div className="border p-4 mb-4">
-                <img
+                <Image
                     src={`https://picsum.photos/id/${randId}/300/172`}
+                    width={300}
+                    height={172}
                     alt={video.title}
                     className="w-full"
                 />

@@ -14,17 +14,16 @@ export const metadata: Metadata = {
         "Transform your learning experience with LearnWell.",
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode; }>) {
     return (
         <html lang="en">
         <body>
         <div>
             <NavBar/>
-            <main>{children}</main>
+            <main className="mt-20">
+                {children}
+            </main>
+
         </div>
 
         </body>
