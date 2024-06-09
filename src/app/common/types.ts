@@ -8,11 +8,8 @@ export interface Video {
     num_comments: number;
 }
 
-export interface VideoCardProps {
-    video: Video;
-}
 
-export interface Comment {
+export interface VideoComment {
     id: string;
     video_id: string;
     user_id: string;

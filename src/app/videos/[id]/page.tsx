@@ -3,8 +3,12 @@
 import VideoPlayer from '../../components/VideoPlayer';
 import { useEffect, useRef, useState } from 'react';
 import videojs from "video.js";
-import { getUserVideos } from "../../common/api";
+import { getUserVideos, getVideoComments } from "../../common/api";
 import VideoCard from "../../components/VideoCard";
+import { VideoComment } from "../../common/types";
+import VideoComments from "../../components/VideoComments";
+import CommentComponent from "../../components/CommentCard";
+import CommentList from "../../components/VideoComments";
 
 interface Video {
     id: string;
@@ -19,6 +23,7 @@ interface Video {
 export default function Page({ params }: { params: { id: string } }) {
     const [videos, setVideos] = useState<Video[]>([]);
     const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
+    const [videoComments, setVideoComments] = useState<VideoComment[]>([]);
 
     const playerRef = useRef(null);
 
@@ -55,6 +60,8 @@ export default function Page({ params }: { params: { id: string } }) {
                 setVideos(userVideos);
                 const selectedVideo = userVideos.find(video => video.id === params.id);
                 setCurrentVideo(selectedVideo || null);
+                const videoComments = await getVideoComments(selectedVideo.id);
+                setVideoComments(videoComments);
             } catch (error) {
                 console.error('Failed to fetch videos:', error);
             }
@@ -64,7 +71,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4 mb-4">
             <div className="lg:col-span-3">
                 {currentVideo && (
                     <>
@@ -74,10 +81,13 @@ export default function Page({ params }: { params: { id: string } }) {
                             <p><strong>Uploaded by:</strong> {currentVideo.user_id}</p>
                             <p><strong>Uploaded on:</strong> {new Date(currentVideo.created_at).toLocaleDateString()}</p>
                             <p><strong>Description:</strong> {currentVideo.description}</p>
-                            <p><strong>Comments:</strong> {currentVideo.num_comments}</p>
                         </div>
                     </>
                 )}
+                <div className="space-y-4 mt-4">
+                    <h2>Comments - {videoComments.length}</h2>
+                    <CommentList videoComments={videoComments}/>
+                </div>
             </div>
             <div className="lg:col-span-1">
                 <h2 className="text-xl font-bold mb-4">Other Videos</h2>

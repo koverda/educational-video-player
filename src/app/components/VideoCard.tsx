@@ -1,7 +1,11 @@
 import React from 'react';
-import { VideoCardProps } from "../common/types";
+import { Video } from "../common/types";
 import Link from "next/link";
 import { getRandomInt } from "../common/util";
+
+export interface VideoCardProps {
+    video: Video;
+}
 
 const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
     const randId = getRandomInt(1, 50);
