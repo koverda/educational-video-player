@@ -6,9 +6,8 @@ import videojs from "video.js";
 import { getUserVideos, getVideoComments } from "../../common/api";
 import VideoCard from "../../components/VideoCard";
 import { VideoComment } from "../../common/types";
-import VideoComments from "../../components/VideoComments";
-import CommentComponent from "../../components/CommentCard";
-import CommentList from "../../components/VideoComments";
+import CommentList from "../../components/CommentList";
+import AddComment from "../../components/AddComment";
 
 interface Video {
     id: string;
@@ -51,7 +50,10 @@ export default function Page({ params }: { params: { id: string } }) {
         });
     };
 
-
+    const handleCommentAdded = async () => {
+        const videoComments = await getVideoComments(params.id);
+        setVideoComments(videoComments);
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -86,6 +88,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 )}
                 <div className="space-y-4 mt-4">
                     <h2>Comments - {videoComments.length}</h2>
+                    <AddComment videoId={currentVideo?.id} onCommentAdded={handleCommentAdded} />
                     <CommentList videoComments={videoComments}/>
                 </div>
             </div>

@@ -10,7 +10,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
         <div className="comment">
             <div className="comment-header">
                 <span className="comment-user-id">{comment.user_id}</span>
-                <span className="comment-created-at">{new Date(comment.created_at).toLocaleString()}</span>
+                <span className="comment-created-at">{new Date(comment.created_at?? Date.now()).toLocaleString()}</span>
             </div>
             <div className="comment-content">
                 {comment.content}
