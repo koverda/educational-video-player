@@ -9,7 +9,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
 
             <div className="border p-4 mb-4">
                 <img
-                    src={video.video_url}
+                    src="https://picsum.photos/300/172"
                     alt={video.title}
                     className="w-full"
                 />
