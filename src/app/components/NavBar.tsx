@@ -29,7 +29,7 @@ const NavBar = () => {
 
 
     return (
-        <nav className="p-4 fixed top-0 w-full z-50">
+        <nav className="p-4 fixed top-0 w-full z-50 bg-white">
             <div className="container mx-auto flex justify-between items-center">
                 <Search />
                 <div>
