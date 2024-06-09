@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link';
+import Image from 'next/image'
 import { useState } from "react";
 import UploadModal from './UploadModal';
 
@@ -17,7 +18,7 @@ const NavBar = () => {
         <nav className="bg-gray-800 p-4">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="text-white text-xl font-bold">
-                    <Link href="/">LearnWell</Link>
+                    <Link href="/"><Image src="/images/FULL_LOGO_COLOR.png" width={315} height={87} /></Link>
                 </div>
                 <div className="space-x-4 flex items-center">
                     <button
