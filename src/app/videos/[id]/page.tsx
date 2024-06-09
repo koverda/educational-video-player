@@ -8,6 +8,7 @@ import VideoCard from "../../components/VideoCard";
 import { VideoComment } from "../../common/types";
 import CommentList from "../../components/CommentList";
 import AddComment from "../../components/AddComment";
+import { USER_ID } from "../../common/fakeauth";
 
 interface Video {
     id: string;
@@ -58,7 +59,7 @@ export default function Page({ params }: { params: { id: string } }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const userVideos = await getUserVideos('string'); // Use "string" as the username for now
+                const userVideos = await getUserVideos(USER_ID);
                 setVideos(userVideos);
                 const selectedVideo = userVideos.find(video => video.id === params.id);
                 setCurrentVideo(selectedVideo || null);

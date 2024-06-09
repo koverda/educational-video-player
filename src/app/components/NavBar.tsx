@@ -5,14 +5,26 @@ import Image from 'next/image'
 import { useState } from "react";
 import UploadModal from './UploadModal';
 import Search from "./Search";
+import { createVideo } from "../common/api";
+import { Video} from "../common/types";
+import { USER_ID } from "../common/fakeauth";
 
 const NavBar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleUpload = (title: string, videoUrl: string) => {
-        // todo: actual upload logic
-        console.log('Title:', title);
-        console.log('Video URL:', videoUrl);
+    const handleUpload = async (title: string, videoUrl: string) => {
+        try {
+            const newVideo = new Video();
+            newVideo.title = title;
+            newVideo.video_url = videoUrl;
+            newVideo.user_id = USER_ID;
+            newVideo.description = ""
+
+            await createVideo(newVideo);
+            console.log('Video uploaded successfully');
+        } catch (error) {
+            console.error('Failed to upload video:', error);
+        }
     };
 
 
