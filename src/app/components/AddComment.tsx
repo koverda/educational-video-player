@@ -15,7 +15,7 @@ const AddComment: React.FC<AddCommentProps> = ({ videoId, onCommentAdded }) => {
         event.preventDefault();
 
         try {
-            const newComment = await createComment({ video_id: videoId, user_id: USER_ID, content });
+            void await createComment({ video_id: videoId, user_id: USER_ID, content });
             onCommentAdded();
             setContent('');
         } catch (error) {
