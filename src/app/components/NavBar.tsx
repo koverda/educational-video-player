@@ -29,18 +29,18 @@ const NavBar = () => {
 
 
     return (
-        <nav className="bg-gray-800 p-4 fixed top-0 w-full z-50">
+        <nav className="p-4 fixed top-0 w-full z-50">
             <div className="container mx-auto flex justify-between items-center">
                 <Search />
                 <div>
-                    <Link href="/"><Image src="/images/FULL_LOGO_COLOR.png" alt="LearnWell Logo" width={105} height={29} priority={true} /></Link>
+                    <Link href="/"><Image src="/images/FULL_LOGO_COLOR.png" alt="LearnWell Logo" width={157.5} height={43.5} priority={true} /></Link>
                 </div>
-                <div className="space-x-4 flex items-center">
+                <div className="space-x-4 flex items-center  ">
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="px-4 py-2 border rounded bg-blue-500 text-white"
+                        className="px-4 py-2 rounded-full bg-blue-500 font-bold text-white"
                     >
-                        Upload Video
+                        Upload
                     </button>
                 </div>
             </div>
