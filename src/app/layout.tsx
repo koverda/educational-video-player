@@ -18,16 +18,11 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode;
     return (
         <html lang="en">
         <body>
-        <div>
-            <NavBar/>
-            <main className="mt-20">
-                {children}
-            </main>
-
+        <NavBar/>
+        <div className="mt-20">
+            {children}
         </div>
-
         </body>
-
         </html>
     );
 }

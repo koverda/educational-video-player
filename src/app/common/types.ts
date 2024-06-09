@@ -1,4 +1,4 @@
-export interface Video {
+export class Video {
     id: string;
     created_at: string;
     video_url: string;

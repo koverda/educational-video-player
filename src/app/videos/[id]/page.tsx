@@ -32,8 +32,9 @@ export default function Page({ params }: { params: { id: string } }) {
         controls: true,
         responsive: true,
         fluid: true,
+        playbackRates: [0.5, 1, 1.5, 2],
         sources: [{
-            src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            src: currentVideo?.video_url,
             type: 'video/mp4'
         }]
     };
