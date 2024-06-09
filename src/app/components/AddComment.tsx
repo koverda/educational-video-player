@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createComment } from '/src/app/common/api';
+import { USER_ID } from "../common/fakeauth";
 
 interface AddCommentProps {
     videoId: string;
@@ -8,17 +9,15 @@ interface AddCommentProps {
 
 const AddComment: React.FC<AddCommentProps> = ({ videoId, onCommentAdded }) => {
     const [content, setContent] = useState('');
-    const [userId, setUserId] = useState('');
 
     const handleSubmit = async (event: React.FormEvent) => {
         console.log("comment submit")
         event.preventDefault();
 
         try {
-            const newComment = await createComment({ video_id: videoId, user_id: userId, content });
+            const newComment = await createComment({ video_id: videoId, user_id: USER_ID, content });
             onCommentAdded();
             setContent('');
-            setUserId('');
         } catch (error) {
             console.error('Error adding comment:', error);
         }
@@ -26,18 +25,6 @@ const AddComment: React.FC<AddCommentProps> = ({ videoId, onCommentAdded }) => {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-lg shadow-md bg-white">
-            <div>
-                <label className="block text-sm font-medium text-gray-700">
-                    User ID:
-                    <input
-                        type="text"
-                        value={userId}
-                        onChange={(e) => setUserId(e.target.value)}
-                        required
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                </label>
-            </div>
             <div>
                 <label className="block text-sm font-medium text-gray-700">
                     Content:
