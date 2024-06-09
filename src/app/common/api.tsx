@@ -7,7 +7,7 @@ export async function getUserVideos(userId: string): Promise<Video[]> {
     if (!response.ok) {
         throw new Error('Failed to fetch videos');
     }
-    return await response.json();
+    return  (await response.json())["videos"];
 }
 
 export async function getSingleVideo(videoId: string): Promise<Video> {
@@ -15,7 +15,7 @@ export async function getSingleVideo(videoId: string): Promise<Video> {
     if (!response.ok) {
         throw new Error('Failed to fetch video');
     }
-    return await response.json();
+    return (await response.json())["video"];
 }
 
 export async function createVideo(video: Omit<Video, 'id' | 'created_at' | 'num_comments'>): Promise<Video> {
@@ -51,7 +51,7 @@ export async function getVideoComments(videoId: string): Promise<Comment[]> {
     if (!response.ok) {
         throw new Error('Failed to fetch comments');
     }
-    return await response.json();
+    return (await response.json())["comments"];
 }
 
 export async function createComment(comment: Omit<Comment, 'id' | 'created_at'>): Promise<Comment> {
