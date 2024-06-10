@@ -43,7 +43,7 @@ export function timeAgo(date: Date): string {
     return `${Math.floor(seconds)} seconds ago`;
 }
 
-export function extractInitials(snakeCaseString) {
+export function extractInitials(snakeCaseString: string): string {
     if (snakeCaseString == null) return "";
 
     const words = snakeCaseString.split('_');
@@ -53,7 +53,7 @@ export function extractInitials(snakeCaseString) {
     return first + second;
 }
 
-function hashCode(str) {
+function hashCode(str: string): number {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
@@ -63,7 +63,7 @@ function hashCode(str) {
     return hash;
 }
 
-export function generatePastelColorFromLetters(letters) {
+export function generatePastelColorFromLetters(letters: string): string {
     const hash = hashCode(letters);
     const r = (hash & 0xFF0000) >> 16;
     const g = (hash & 0x00FF00) >> 8;
