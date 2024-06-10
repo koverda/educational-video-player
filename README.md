@@ -55,6 +55,7 @@ This application consumes the following API: https://take-home-assessment-423502
 
 ## Further Improvements
 
+- CORS support on the server
 - Improve state management
 - Make search functional
 - Responsive design
@@ -62,6 +63,7 @@ This application consumes the following API: https://take-home-assessment-423502
 - Add auth
 - Edit video functionality
 - Expose video description
+- Improve type usage
 
 ## Contributing
 
