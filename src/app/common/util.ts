@@ -73,6 +73,5 @@ export function generatePastelColorFromLetters(letters: string): string {
     const pastelG = Math.floor((g + 255) / 2);
     const pastelB = Math.floor((b + 255) / 2);
 
-    const pastelColor = `#${pastelR.toString(16).padStart(2, '0')}${pastelG.toString(16).padStart(2, '0')}${pastelB.toString(16).padStart(2, '0')}`;
-    return pastelColor;
+    return `#${pastelR.toString(16).padStart(2, '0')}${pastelG.toString(16).padStart(2, '0')}${pastelB.toString(16).padStart(2, '0')}`;
 }
