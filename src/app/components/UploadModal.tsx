@@ -10,7 +10,7 @@ interface UploadModalProps {
 const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) => {
   const [title, setTitle] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement|null>(null);
 
 
   const handleSubmit = () => {
@@ -24,7 +24,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      if (modalRef.current && !modalRef.current!.contains(event.target as Node)) {
         onClose();
       }
     };

@@ -14,11 +14,12 @@ const NavBar = () => {
 
     const handleUpload = async (title: string, videoUrl: string) => {
         try {
-            const newVideo = new Video();
-            newVideo.title = title;
-            newVideo.video_url = videoUrl;
-            newVideo.user_id = USER_ID;
-            newVideo.description = ""
+            let newVideo = {
+                title: title,
+                video_url: videoUrl,
+                user_id: USER_ID,
+                description: ""
+            } as Video
 
             await createVideo(newVideo);
             console.log('Video uploaded successfully');
