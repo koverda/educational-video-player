@@ -1,7 +1,7 @@
 'use client';
 
 import VideoPlayer from '../../components/VideoPlayer';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import videojs from "video.js";
 import { getUserVideos, getVideoComments } from "../../common/api";
 import VideoCard from "../../components/VideoCard";
@@ -9,6 +9,8 @@ import { VideoComment } from "../../common/types";
 import CommentList from "../../components/CommentList";
 import AddComment from "../../components/AddComment";
 import { USER_ID } from "../../common/fakeauth";
+import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
+import { extractInitials, generatePastelColorFromLetters, timeAgo } from "../../common/util";
 
 interface Video {
     id: string;
@@ -24,6 +26,8 @@ export default function Page({ params }: { params: { id: string } }) {
     const [videos, setVideos] = useState<Video[]>([]);
     const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
     const [videoComments, setVideoComments] = useState<VideoComment[]>([]);
+    const initials = extractInitials(currentVideo?.user_id);
+    const backgroundColor = generatePastelColorFromLetters(initials);
 
     const playerRef = useRef(null);
 
@@ -70,6 +74,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 console.error('Failed to fetch videos:', error);
             }
         }
+
         fetchData();
     }, [params.id]);
 
@@ -79,18 +84,28 @@ export default function Page({ params }: { params: { id: string } }) {
             <div className="lg:col-span-3">
                 {currentVideo && (
                     <>
-                        <h1 className="text-2xl font-bold mb-4">{currentVideo.title}</h1>
-                        <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} />
-                        <div className="mt-4">
-                            <p><strong>Uploaded by:</strong> {currentVideo.user_id}</p>
-                            <p><strong>Uploaded on:</strong> {new Date(currentVideo.created_at).toLocaleDateString()}</p>
-                            <p><strong>Description:</strong> {currentVideo.description}</p>
+                        <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady}/>
+                        <h1 className="text-2xl font-bold mt-4">{currentVideo.title}</h1>
+                        <div>
+                            <div className="flex items-center mt-2">
+                                <div
+                                    className="w-6 h-6 font-light text-xs rounded-full flex items-center justify-center"
+                                    style={{ backgroundColor }}
+                                >
+                                    <span className="text-white font-bold">{initials}</span>
+                                </div>
+                                <p className="ml-2">{currentVideo.user_id} · Uploaded {new Date(currentVideo.created_at).toLocaleDateString()}</p>
+                            </div>
+                            <div className="flex items-center mt-2">
+                                <ChatBubbleLeftEllipsisIcon className="h-5 w-5 text-gray-500 mr-1"/>
+                                <p className="text-gray-500"><span className="ml-2">{videoComments.length} comments</span></p>
+                            </div>
                         </div>
                     </>
                 )}
                 <div className="space-y-4 mt-4">
-                    <h2>Comments - {videoComments.length}</h2>
-                    <AddComment videoId={currentVideo?.id} onCommentAdded={handleCommentAdded} />
+                    <h2 className="text-lg font-bold">Comments · {videoComments.length}</h2>
+                    <AddComment videoId={currentVideo?.id} onCommentAdded={handleCommentAdded}/>
                     <CommentList videoComments={videoComments}/>
                 </div>
             </div>
@@ -98,7 +113,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 <h2 className="text-xl font-bold mb-4">Other Videos</h2>
                 <div className="space-y-4">
                     {videos.map(video => (
-                        <VideoCard key={video.id} video={video} />
+                        <VideoCard key={video.id} video={video}/>
                     ))}
                 </div>
             </div>
