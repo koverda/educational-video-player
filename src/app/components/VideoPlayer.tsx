@@ -1,14 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+import Player from "video.js/dist/types/player";
 
-interface VideoPlayerParams {
-    props: any;
-}
-
-export const VideoPlayer = ({props}: VideoPlayerParams) => {
-    const videoRef = useRef(null);
-    const playerRef = useRef(null);
+export const VideoPlayer = (props:any) => {
+    const videoRef = useRef<HTMLDivElement|null>(null);
+    const playerRef = useRef<Player|null>(null);
     const { options, onReady } = props;
 
     useEffect(() => {
@@ -19,7 +16,9 @@ export const VideoPlayer = ({props}: VideoPlayerParams) => {
             const videoElement = document.createElement("video-js");
 
             videoElement.classList.add('vjs-big-play-centered');
-            videoRef.current.appendChild(videoElement);
+            if (videoRef && videoRef.current){
+                videoRef.current.appendChild(videoElement);
+            }
 
             const player = playerRef.current = videojs(videoElement, options, () => {
                 videojs.log('player is ready');
@@ -30,9 +29,11 @@ export const VideoPlayer = ({props}: VideoPlayerParams) => {
             // on prop change, for example:
         } else {
             const player = playerRef.current;
+            if(player){
+                player.autoplay(options.autoplay);
+                player.src(options.sources);
 
-            player.autoplay(options.autoplay);
-            player.src(options.sources);
+            }
         }
     }, [options, videoRef, onReady]);
 

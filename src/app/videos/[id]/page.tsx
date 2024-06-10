@@ -5,33 +5,28 @@ import React, { useEffect, useRef, useState } from 'react';
 import videojs from "video.js";
 import { getUserVideos, getVideoComments } from "../../common/api";
 import VideoCard from "../../components/VideoCard";
-import { VideoComment } from "../../common/types";
+import { Video, VideoComment } from "../../common/types";
 import CommentList from "../../components/CommentList";
 import AddComment from "../../components/AddComment";
 import { USER_ID } from "../../common/fakeauth";
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import { extractInitials, generatePastelColorFromLetters, timeAgo } from "../../common/util";
-
-interface Video {
-    id: string;
-    created_at: string;
-    video_url: string;
-    user_id: string;
-    description: string;
-    title: string;
-    num_comments: number;
-}
+import Player from "video.js/dist/types/player";
 
 export default function Page({ params }: { params: { id: string } }) {
     const [videos, setVideos] = useState<Video[]>([]);
     const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
     const [videoComments, setVideoComments] = useState<VideoComment[]>([]);
-    const initials = extractInitials(currentVideo?.user_id);
-    const backgroundColor = generatePastelColorFromLetters(initials);
+    let initials = "";
+    let backgroundColor = "";
+    if(currentVideo && currentVideo.user_id){
+        initials = extractInitials(currentVideo?.user_id as string);
+        backgroundColor = generatePastelColorFromLetters(initials);
+    }
 
-    const playerRef = useRef(null);
+    const playerRef = useRef<Player|null>(null);
 
-    const videoJsOptions = {
+    const videoJsOptions: any  = {
         autoplay: true,
         controls: true,
         responsive: true,
@@ -43,7 +38,7 @@ export default function Page({ params }: { params: { id: string } }) {
         }]
     };
 
-    const handlePlayerReady = (player) => {
+    const handlePlayerReady = (player: Player) => {
         playerRef.current = player;
 
         // You can handle player events here, for example:
@@ -68,14 +63,17 @@ export default function Page({ params }: { params: { id: string } }) {
                 setVideos(userVideos);
                 const selectedVideo = userVideos.find(video => video.id === params.id);
                 setCurrentVideo(selectedVideo || null);
-                const videoComments = await getVideoComments(selectedVideo.id);
-                setVideoComments(videoComments);
+                let videoComments: VideoComment[]
+                if (selectedVideo){
+                    videoComments = await getVideoComments(selectedVideo.id);
+                    setVideoComments(videoComments);
+                }
             } catch (error) {
                 console.error('Failed to fetch videos:', error);
             }
         }
 
-        fetchData();
+        void fetchData();
     }, [params.id]);
 
 
@@ -83,7 +81,7 @@ export default function Page({ params }: { params: { id: string } }) {
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-4 gap-4 p-4 mb-4">
             <div className="lg:col-span-3">
                 {currentVideo && (
-                    <>
+                    <div>
                         <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady}/>
                         <h1 className="text-2xl font-bold mt-4">{currentVideo.title}</h1>
                         <div>
@@ -101,11 +99,11 @@ export default function Page({ params }: { params: { id: string } }) {
                                 <p className="text-gray-500"><span className="ml-2">{videoComments.length} comments</span></p>
                             </div>
                         </div>
-                    </>
+                    </div>
                 )}
                 <div className="space-y-4 mt-4">
                     <h2 className="text-lg font-bold">Comments · {videoComments.length}</h2>
-                    <AddComment videoId={currentVideo?.id} onCommentAdded={handleCommentAdded}/>
+                    <AddComment videoId={currentVideo?.id!} onCommentAdded={handleCommentAdded}/>
                     <CommentList videoComments={videoComments}/>
                 </div>
             </div>
