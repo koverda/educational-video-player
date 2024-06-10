@@ -1,5 +1,5 @@
 import React from 'react';
-import { VideoComment } from '/src/app/common/types'
+import { VideoComment } from '../common/types'
 import { extractInitials, generatePastelColorFromLetters } from "../common/util";
 
 export interface CommentCardProps {

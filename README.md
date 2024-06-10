@@ -49,7 +49,19 @@ This application consumes the following API: https://take-home-assessment-423502
 
 ## Deploying
 
-ToDo
+1. Create a new Vercel project
+2. Select this repository
+3. Deploy Vercel project
+
+## Further Improvements
+
+- Improve state management
+- Make search functional
+- Responsive design
+- Add automated tests
+- Add auth
+- Edit video functionality
+- Expose video description
 
 ## Contributing
 

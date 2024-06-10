@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createComment } from '/src/app/common/api';
+import { createComment } from '../common/api';
 import { USER_ID } from "../common/fakeauth";
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
 
