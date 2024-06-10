@@ -21,14 +21,14 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
   };
 
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      onClose();
-    }
-  };
-
 
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
@@ -38,7 +38,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
 
   if (!isOpen) return null;

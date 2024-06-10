@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 
 export const VideoPlayer = (props) => {
-    const videoRef = React.useRef(null);
-    const playerRef = React.useRef(null);
-    const {options, onReady} = props;
+    const videoRef = useRef(null);
+    const playerRef = useRef(null);
+    const { options, onReady } = props;
 
-    React.useEffect(() => {
+    useEffect(() => {
 
         // Make sure Video.js player is only initialized once
         if (!playerRef.current) {
@@ -30,7 +30,7 @@ export const VideoPlayer = (props) => {
             player.autoplay(options.autoplay);
             player.src(options.sources);
         }
-    }, [options, videoRef]);
+    }, [options, videoRef, onReady]);
 
     // Dispose the Video.js player when the functional component unmounts
     React.useEffect(() => {
@@ -46,7 +46,7 @@ export const VideoPlayer = (props) => {
 
     return (
         <div data-vjs-player>
-            <div ref={videoRef} />
+            <div ref={videoRef}/>
         </div>
     );
 }

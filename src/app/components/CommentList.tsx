@@ -11,7 +11,7 @@ const CommentList: React.FC<CommentListProps> = ({ videoComments }) => {
     return (
         <div className="comment-list">
             {videoComments.map(videoComment => (
-                <CommentComponent comment={videoComment} />
+                <CommentComponent key={videoComment.id} comment={videoComment} />
             ))}
         </div>
     );
